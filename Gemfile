@@ -19,17 +19,17 @@ gem 'kaminari'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rspec-rails', '~> 6.0', group: [:development, :test]
 
+# Background job processing
+gem 'sidekiq', '~> 7.0'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
-
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ jruby ]
@@ -51,6 +51,8 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
+  
+  # Email preview in development
+  gem 'letter_opener', '~> 1.8'
 end
 

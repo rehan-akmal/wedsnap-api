@@ -40,19 +40,58 @@ buyer = User.create!(
   role: 'user'
 )
 
+# Create test users for chat functionality
+user1 = User.find_or_create_by(email: 'alice@example.com') do |user|
+  user.name = 'Alice Johnson'
+  user.password = 'password123'
+  user.role = 'user'
+end
+
+user2 = User.find_or_create_by(email: 'bob@example.com') do |user|
+  user.name = 'Bob Smith'  
+  user.password = 'password123'
+  user.role = 'user'
+end
+
+user3 = User.find_or_create_by(email: 'charlie@example.com') do |user|
+  user.name = 'Charlie Brown'
+  user.password = 'password123'
+  user.role = 'user'
+end
+
+puts "Created test users: #{[user1.name, user2.name, user3.name].join(', ')}"
+
 # Create categories
 puts "Creating categories..."
 category_names = %w[Design Writing Programming Music]
 categories = category_names.map { |name| Category.create!(name: name) }
 
-# Create availabilities for sellers
-puts "Creating availabilities..."
-[
-  { user: seller1, day_of_week: 1, start_time: '09:00', end_time: '17:00' },
-  { user: seller1, day_of_week: 3, start_time: '10:00', end_time: '18:00' },
-  { user: seller2, day_of_week: 2, start_time: '11:00', end_time: '15:00' },
-  { user: seller2, day_of_week: 4, start_time: '12:00', end_time: '16:00' }
-].each { |attrs| Availability.create!(attrs) }
+# Create some sample availabilities for testing
+puts "Creating sample availabilities..."
+
+# Create availabilities for seller1
+seller1.availabilities.create!([
+  { date: Date.current + 1.day, is_available: true },
+  { date: Date.current + 2.days, is_available: true },
+  { date: Date.current + 3.days, is_available: false },
+  { date: Date.current + 4.days, is_available: true },
+  { date: Date.current + 5.days, is_available: false },
+  { date: Date.current + 6.days, is_available: true },
+  { date: Date.current + 7.days, is_available: true },
+])
+
+# Create availabilities for seller2
+seller2.availabilities.create!([
+  { date: Date.current + 1.day, is_available: false },
+  { date: Date.current + 2.days, is_available: true },
+  { date: Date.current + 3.days, is_available: true },
+  { date: Date.current + 4.days, is_available: false },
+  { date: Date.current + 5.days, is_available: true },
+  { date: Date.current + 6.days, is_available: true },
+  { date: Date.current + 7.days, is_available: false },
+])
+
+puts "Sample availabilities created!"
 
 # Create gigs with nested resources
 puts "Creating gigs and nested resources..."
@@ -143,5 +182,17 @@ gig5.features.create!([
 gig5.faqs.create!([
   { question: 'Do you provide deployment?', answer: 'Yes, deployment to Heroku or AWS.' }
 ])
+
+# Create a test gig
+if user1.gigs.empty?
+  gig = user1.gigs.create!(
+    title: 'Professional Wedding Photography',
+    description: 'Capture your special day with beautiful, timeless photos.',
+    price: 1500,
+    delivery_time: 14,
+    status: 'active'
+  )
+  puts "Created test gig: #{gig.title}"
+end
 
 puts "Seeding completed!"

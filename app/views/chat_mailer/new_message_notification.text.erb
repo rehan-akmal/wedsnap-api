@@ -1,0 +1,19 @@
+New Message from <%= @sender.name %> - WedSnap
+
+Hi <%= @recipient.name %>,
+
+You have received a new message from <%= @sender.name %>:
+
+"<%= @message.content %>"
+
+Sent on: <%= @message.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+
+To view and reply to this message, please visit:
+<%= ENV['FRONTEND_URL'] || 'http://localhost:3000' %>/messages
+
+---
+You're receiving this email because you have a conversation with <%= @sender.name %> on WedSnap.
+
+If you no longer want to receive email notifications for new messages, you can update your notification settings in your account.
+
+WedSnap - Connecting wedding professionals with couples 

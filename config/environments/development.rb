@@ -33,12 +33,21 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
+  # Configure Active Storage URL options
+  config.active_storage.default_url_options = { host: 'localhost', port: 3001 }
+  config.active_storage.routes_prefix = '/api/v1'
+
+  # Configure Action Mailer for development
   config.action_mailer.raise_delivery_errors = false
-
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
   config.action_mailer.perform_caching = false
+  
+  # Use LetterOpener for email preview in development
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+
+  # Configure Active Job to use Sidekiq
+  config.active_job.queue_adapter = :sidekiq
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

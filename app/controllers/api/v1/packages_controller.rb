@@ -13,14 +13,14 @@ module Api
         # GET /api/v1/packages/:id
         def show
           package = Package.find(params[:id])
-          render json: PackageSerializer.new(package)
+          render json: package, serializer: PackageSerializer
         end
   
         # POST /api/v1/gigs/:gig_id/packages
         def create
           package = @gig.packages.build(package_params)
           if package.save
-            render json: PackageSerializer.new(package), status: :created
+            render json: package, serializer: PackageSerializer, status: :created
           else
             render json: { errors: package.errors.full_messages }, status: :unprocessable_entity
           end
@@ -30,7 +30,7 @@ module Api
         def update
           package = Package.find(params[:id])
           if package.update(package_params)
-            render json: PackageSerializer.new(package)
+            render json: package, serializer: PackageSerializer
           else
             render json: { errors: package.errors.full_messages }, status: :unprocessable_entity
           end

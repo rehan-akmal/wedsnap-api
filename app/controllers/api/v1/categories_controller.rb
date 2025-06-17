@@ -13,7 +13,7 @@ module Api
         # GET /api/v1/categories/:id
         def show
           cat = Category.find(params[:id])
-          render json: CategorySerializer.new(cat)
+          render json: cat, serializer: CategorySerializer
         end
       end
     end
