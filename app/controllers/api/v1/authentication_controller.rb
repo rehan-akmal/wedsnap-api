@@ -9,7 +9,7 @@ module Api
         user = User.new(user_params)
         user.role = 'user' # Set default role for new users
         if user.save
-          token = encode(user_id: user.id)
+          token = encode(user_id: user.id, role: user.role)
           render json: {
             token: token,
             user: user.as_json(
@@ -26,7 +26,7 @@ module Api
       def login
         user = User.find_by(email: params[:email])
         if user && user.password == params[:password]
-          token = encode(user_id: user.id)
+          token = encode(user_id: user.id, role: user.role)
           render json: {
             token: token,
             user: user.as_json(

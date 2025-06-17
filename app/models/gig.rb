@@ -3,6 +3,7 @@ class Gig < ApplicationRecord
   has_many :packages, dependent: :destroy
   has_many :features, dependent: :destroy
   has_many :faqs, dependent: :destroy
+  has_many :conversations, dependent: :destroy
   # has_many :orders, dependent: :destroy  # TODO: Create Order model
   has_many_attached :images
   has_many :gigs_categories, dependent: :destroy

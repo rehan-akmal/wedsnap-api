@@ -25,10 +25,47 @@ Rails.application.routes.draw do
       get 'dashboard/buyer/stats', to: 'dashboard#buyer_stats'
       get 'dashboard/overview', to: 'dashboard#overview'
 
+      # Super Admin Dashboard
+      # Dashboard Overview
+      get 'super_admin/dashboard/overview', to: 'super_admin#dashboard_overview'
+      
+      # Analytics
+      get 'super_admin/analytics/users', to: 'super_admin#user_analytics'
+      get 'super_admin/analytics/gigs', to: 'super_admin#gig_analytics'
+      get 'super_admin/analytics/communications', to: 'super_admin#communication_analytics'
+      get 'super_admin/analytics/system', to: 'super_admin#system_analytics'
+      
+      # User Management
+      get 'super_admin/users', to: 'super_admin#users_list'
+      get 'super_admin/users/:id', to: 'super_admin#user_details'
+      put 'super_admin/users/:id/role', to: 'super_admin#update_user_role'
+      delete 'super_admin/users/:id', to: 'super_admin#delete_user'
+      
+      # Gig Management
+      get 'super_admin/gigs', to: 'super_admin#gigs_list'
+      get 'super_admin/gigs/:id', to: 'super_admin#gig_details'
+      delete 'super_admin/gigs/:id', to: 'super_admin#delete_gig'
+      
+      # Category Management
+      get 'super_admin/categories', to: 'super_admin#categories_list'
+      post 'super_admin/categories', to: 'super_admin#create_category'
+      put 'super_admin/categories/:id', to: 'super_admin#update_category'
+      delete 'super_admin/categories/:id', to: 'super_admin#delete_category'
+      
+      # System Settings
+      get 'super_admin/system/settings', to: 'super_admin#system_settings'
+
       # Users
       resources :users, only: %i[index show create update destroy] do
         member do
           get :availability
+          get :estimate_calculator_settings
+        end
+        collection do
+          get :settings
+          put :update_notification_settings
+          put :update_availability_settings
+          put :update_estimate_calculator_settings
         end
       end
 

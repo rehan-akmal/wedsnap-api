@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_one_attached :avatar
     has_many :gigs, dependent: :destroy
-    has_many :conversations, dependent: :destroy
+    # has_many :conversations, dependent: :destroy  # Removed - conversations table uses user1_id/user2_id
     has_many :messages, dependent: :destroy
     has_many :availabilities, dependent: :destroy
     
@@ -48,6 +48,18 @@ class User < ApplicationRecord
             days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             startTime: '09:00',
             endTime: '17:00'
+        }
+    end
+
+    def estimate_calculator_settings
+        settings['estimate_calculator'] || {
+            photography_coverage: 18000,
+            videography_coverage: 25000,
+            drone_footage: 8000,
+            gimbal_stabilizer: 5000,
+            basic_color_correction: 4000,
+            advanced_editing_package: 7000,
+            express_delivery_surcharge: 20
         }
     end
 end
