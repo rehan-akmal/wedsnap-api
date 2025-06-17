@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_235806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date", null: false
-    t.boolean "is_available", default: true, null: false
+    t.boolean "available", default: true, null: false
     t.index ["user_id", "date"], name: "index_availabilities_on_user_id_and_date", unique: true
     t.index ["user_id"], name: "index_availabilities_on_user_id"
   end

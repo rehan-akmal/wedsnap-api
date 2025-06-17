@@ -71,24 +71,24 @@ puts "Creating sample availabilities..."
 
 # Create availabilities for seller1
 seller1.availabilities.create!([
-  { date: Date.current + 1.day, is_available: true },
-  { date: Date.current + 2.days, is_available: true },
-  { date: Date.current + 3.days, is_available: false },
-  { date: Date.current + 4.days, is_available: true },
-  { date: Date.current + 5.days, is_available: false },
-  { date: Date.current + 6.days, is_available: true },
-  { date: Date.current + 7.days, is_available: true },
+  { date: Date.current + 1.day, available: true },
+  { date: Date.current + 2.days, available: true },
+  { date: Date.current + 3.days, available: false },
+  { date: Date.current + 4.days, available: true },
+  { date: Date.current + 5.days, available: false },
+  { date: Date.current + 6.days, available: true },
+  { date: Date.current + 7.days, available: true },
 ])
 
 # Create availabilities for seller2
 seller2.availabilities.create!([
-  { date: Date.current + 1.day, is_available: false },
-  { date: Date.current + 2.days, is_available: true },
-  { date: Date.current + 3.days, is_available: true },
-  { date: Date.current + 4.days, is_available: false },
-  { date: Date.current + 5.days, is_available: true },
-  { date: Date.current + 6.days, is_available: true },
-  { date: Date.current + 7.days, is_available: false },
+  { date: Date.current + 1.day, available: false },
+  { date: Date.current + 2.days, available: true },
+  { date: Date.current + 3.days, available: true },
+  { date: Date.current + 4.days, available: false },
+  { date: Date.current + 5.days, available: true },
+  { date: Date.current + 6.days, available: true },
+  { date: Date.current + 7.days, available: false },
 ])
 
 puts "Sample availabilities created!"

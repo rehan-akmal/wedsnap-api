@@ -64,7 +64,7 @@ module Api
           if availability
             render json: { 
               date: date, 
-              available: availability.is_available,
+              available: availability.available,
               exists: true 
             }
           else
@@ -83,14 +83,14 @@ module Api
         end
   
         def avail_params
-          params.require(:availability).permit(:date, :is_available)
+          params.require(:availability).permit(:date, :available)
         end
   
         def serialize_availability(availability)
           {
             id: availability.id,
             date: availability.date.strftime('%Y-%m-%d'),
-            available: availability.is_available,
+            available: availability.available,
             created_at: availability.created_at,
             updated_at: availability.updated_at
           }

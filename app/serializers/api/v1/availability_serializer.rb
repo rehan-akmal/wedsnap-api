@@ -6,6 +6,6 @@ class Api::V1::AvailabilitySerializer < ActiveModel::Serializer
   end
 
   def available
-    object.is_available
+    object.available
   end
 end 
